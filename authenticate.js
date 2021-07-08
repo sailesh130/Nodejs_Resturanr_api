@@ -40,7 +40,7 @@ function verifyadmin(req,res,next){
     }
     else{
         const err = new Error("You are not authorize to perform this operation");
-        res.statusCode = 403;
+        err.statusCode = 403;
         next(err);
     }
 }
@@ -56,11 +56,13 @@ function verifycomment(req,res,next){
         else{
                 if(req.method == 'DELETE')
                 {
-                   err = new Error("You are not authorized to delete this comment") 
+                   err = new Error("You are not authorized to delete this comment") ;
+                   err.statusCode = 403;
                    next(err);
                 }
                 else if(req.method == 'PUT'){
-                    err = new Error("You are not authorized to update this comment") 
+                    err = new Error("You are not authorized to update this comment"); 
+                    err.statusCode = 403;
                    next(err);
                 }
 
